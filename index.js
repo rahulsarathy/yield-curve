@@ -4,32 +4,12 @@ window.onload = function () {
     
 }
 
-new Chart(document.getElementById("chart"), {
-  type: 'line',
-  data: {
-    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-    datasets: [{ 
-        data: [86,114,106,106,107,111,133,221,783,2478],
-        label: "Yield Curve",
-        borderColor: "#3e95cd",
-        fill: false
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'US Treasury Yield Curve'
-    }
-  }
-});
-
-var chart2 = new Chart(document.getElementById("chart2"), {
+var chart = new Chart(document.getElementById("chart"), {
     type: 'line',
     data: {
-    labels: ["2019-01-01T13:03:00Z", "2019-01-01T13:02:00Z", "2019-01-01T14:12:00Z"],
+    labels: ["2019-01-01T13:03:00Z", "2019-01-01T14:12:00Z"],
     datasets: [{
-      label: 'Demo',
+      label: 'US Treasury Yield Curve',
       data: [{
           t: "2019-01-15T13:03:00Z",
           y: 12
