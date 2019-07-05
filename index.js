@@ -9,7 +9,7 @@ var chart = new Chart(document.getElementById("chart"), {
     data: {
     labels: ["2019-01-01T13:03:00Z", "2019-01-01T14:12:00Z"],
     datasets: [{
-      label: 'US Treasury Yield Curve',
+      label: 'Daily Treasury Yield Curve Rates',
       data: [{
           t: "2019-01-15T13:03:00Z",
           y: 12
