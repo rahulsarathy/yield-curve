@@ -1,5 +1,7 @@
 # yield-curve
-Displays yield curve from treasury.gov
+
+Displays yield curve from [treasury.gov](https://treasury.gov).
 
 # To run
-open up index.html in browser
+
+Run `./manage.py runserver` in your terminal.
