@@ -19,6 +19,9 @@ class DailyBond:
 		self.year20 = year20
 		self.year30 = year30
 
+	def __repr__(self):
+		return "Bond entry with date: {}".format(self.date)
+
 	def to_json(self):
 		return json.dumps({
 			'date': datetime.strftime(self.date, "%Y-%m-%d"),
@@ -53,14 +56,18 @@ def getXML():
 # FOR TESTING PURPOSES UNCOMMENT
 # retrieves data from text file instead of from treasury.gov
 
-# f = open('./data_dump.txt', 'r')
-# rss_feed = BeautifulSoup(f, 'xml')
-# f.close()
+f = open('./data_dump.txt', 'r')
+rss_feed = BeautifulSoup(f, 'xml')
+f.close()
 
 
 # Retrieves data from treasury govt. Comment out if testing
-rss_feed = getXML()
+# rss_feed = getXML()
+#
+
 contents = rss_feed.find_all('content')
+
+bonds = []
 
 for content in contents:
 	date = content.find('NEW_DATE').get_text()
@@ -83,4 +90,12 @@ for content in contents:
 
 	new_bond = DailyBond(parsed_date, month1, month2, month3, month6, year1, year2, year3, year5, year7, year10, year20, year30)
 
-	print(new_bond.to_json())
+	# print(new_bond.to_json())
+
+	bonds.append(new_bond)
+
+bonds.sort(key=lambda x: x.date)
+for bond in bonds:
+	print(bond)
+
+
