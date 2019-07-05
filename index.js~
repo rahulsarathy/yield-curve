@@ -1,6 +1,0 @@
-import Chart from 'chart.js'
-
-window.onload = function () {
-    
-}
-
