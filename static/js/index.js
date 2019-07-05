@@ -11,15 +11,15 @@ var chart = new Chart(document.getElementById("chart"), {
     datasets: [{
       label: 'Daily Treasury Yield Curve Rates',
       data: [{
-          t: "2019-01-15T13:03:00Z",
+          t: "2019-01-15",
           y: 12
         },
         {
-          t: "2019-02-25T13:02:00Z",
+          t: "2019-02-25",
           y: 21
         },
         {
-          t: "2019-03-25T14:12:00Z",
+          t: "2019-03-25",
           y: 32
         }
       ],
