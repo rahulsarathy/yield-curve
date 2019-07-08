@@ -1,4 +1,5 @@
 BeautifulSoup
 django
+django-rest-framework
 psycopg2
 requests
