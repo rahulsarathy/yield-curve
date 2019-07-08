@@ -1,4 +1,4 @@
-BeautifulSoup
+beautifulsoup4
 django
 django-rest-framework
 psycopg2
