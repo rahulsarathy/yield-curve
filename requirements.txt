@@ -1,6 +1,4 @@
-beautifulsoup4==4.7.1
-Django==2.2.3
-lxml==4.3.4
-pytz==2019.1
-soupsieve==1.9.2
-sqlparse==0.3.0
+BeautifulSoup
+django
+psycopg2
+requests
