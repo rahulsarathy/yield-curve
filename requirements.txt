@@ -1,2 +1,4 @@
+BeautifulSoup
 django
+psycopg2
 requests
