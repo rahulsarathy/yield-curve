@@ -1,23 +1,11 @@
-var chart_data = [{
-  t: "2019-01-15",
-  y: 12
-}, {
-  t: "2019-02-25",
-  y: 21
-}, {
-  t: "2019-03-25",
-  y: 32
-}]
-
-var yield_curve;
+var compressed_chart;
+var uncompressed_chart;
 
 window.onload = function() {
 
   initDatePicker()
-  initChart()
-
-
-
+  compressedChart()
+  uncompressedChart()
 }
 
 function initDatePicker() {
@@ -64,18 +52,22 @@ function getBondData(date) {
           'five_year', 'seven_year', 'ten_year', 'twenty_year', 'thirty_year']
 
         var to_add = []
+        var to_add_uncompressed = []
 
         new_data.forEach(function(element) {
           var wanted_date = proper_dates[element]
           var date_string = wanted_date.getFullYear() + '-' + (wanted_date.getMonth() + 1) + '-' + wanted_date.getDate();
-          to_add.push(
+          to_add.push(data[element])
+          to_add_uncompressed.push(
           {
             t: date_string,
             y: data[element]
           })
         });
 
-        addData(yield_curve, to_add)
+        addData(compressed_chart, to_add)
+        addData(uncompressed_chart, to_add_uncompressed)
+
 
       }
 
@@ -93,13 +85,47 @@ function addData(chart, data) {
   chart.update()
 }
 
-function initChart() {
-  yield_curve = new Chart(document.getElementById("chart"), {
+function compressedChart() {
+  compressed_chart = new Chart(document.getElementById("compressed"), {
+    type: 'line',
+    data: {
+      labels: ['one_month', 'two_month', 'three_month', 'six_month', 'one_year', 'three_year',
+          'five_year', 'seven_year', 'ten_year', 'twenty_year', 'thirty_year'],
+      datasets: [{
+        label: 'Daily Treasury Yield Curve Rates',
+        data: null,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      // scales: {
+      //   xAxes: [{
+      //     type: 'time',
+      //     time: {
+      //       unit: 'year'
+      //     }
+      //   }]
+      // }
+    }
+  });
+  compressed_chart.canvas.parentNode.style.height = '750px';
+  compressed_chart.canvas.parentNode.style.width = '750px';
+
+}
+
+function uncompressedChart() {
+    uncompressed_chart = new Chart(document.getElementById("uncompressed"), {
     type: 'line',
     data: {
       datasets: [{
         label: 'Daily Treasury Yield Curve Rates',
-        data: chart_data,
+        data: null,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
         ],
@@ -121,7 +147,6 @@ function initChart() {
     }
   });
 
-  yield_curve.canvas.parentNode.style.height = '1000px';
-  yield_curve.canvas.parentNode.style.width = '1000px';
-
+  uncompressed_chart.canvas.parentNode.style.height = '750px';
+  uncompressed_chart.canvas.parentNode.style.width = '750px';
 }
