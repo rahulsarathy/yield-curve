@@ -114,10 +114,14 @@ function initChart() {
         xAxes: [{
           type: 'time',
           time: {
-            unit: 'day'
+            unit: 'year'
           }
         }]
       }
     }
   });
+
+  yield_curve.canvas.parentNode.style.height = '1000px';
+  yield_curve.canvas.parentNode.style.width = '1000px';
+
 }
