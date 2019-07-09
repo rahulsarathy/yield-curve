@@ -1,8 +1,8 @@
-
-
 window.onload = function () {
     
 }
+
+// $("#datepicker").datepicker();
 
 var chart = new Chart(document.getElementById("chart"), {
     type: 'line',
@@ -47,7 +47,7 @@ var chart = new Chart(document.getElementById("chart"), {
             xAxes: [{
                 type: 'time',
                 time: {
-                	unit: 'day'
+                  unit: 'day'
                 }
             }]
         }
