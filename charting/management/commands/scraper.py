@@ -24,11 +24,9 @@ class Command(BaseCommand):
     
     contents = rss_feed.find_all('content')
     bonds = []
-    for content in contents:
-      parsed_date = datetime.strptime(content.find('NEW_DATE').get_text(), "%Y-%m-%dT00:00:00")
-      
+    for content in contents:      
       bond_yield = BondYield()
-      bond_yield.date = parsed_date
+      bond_yield.date = datetime.strptime(content.find('NEW_DATE').get_text(), '%Y-%m-%dT00:00:00')
       bond_yield.one_month = get_field(content, 'd:BC_1MONTH')
       bond_yield.two_month = get_field(content, 'd:BC_2MONTH')
       bond_yield.three_month = get_field(content, 'd:BC_3MONTH')
@@ -42,8 +40,9 @@ class Command(BaseCommand):
       bond_yield.twenty_year = get_field(content, 'd:BC_20YEAR')
       bond_yield.thirty_year = get_field(content, 'd:BC_30YEAR')
       bonds.append(bond_yield)
+
+    # Sort the bonds by date and insert them into the database accordingly.
     bonds.sort(key=lambda x: x.date)
-    print(len(bonds))
     for b in bonds:
       b.save()
-    print ('Bonds Added.')
+    print (len(bonds), 'bonds added.')

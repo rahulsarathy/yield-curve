@@ -1,10 +1,12 @@
-# TODO(rsarathy): What does this do?
-
 from __future__ import unicode_literals
 from django.db import models
 
 
 class BondYield(models.Model):
+  """
+  Defines a model for encapsulating daily bond yield data from varying maturity
+  dates.
+  """
   date = models.DateField()
   one_month = models.FloatField(null=True)
   two_month = models.FloatField(null=True)
