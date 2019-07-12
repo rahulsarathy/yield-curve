@@ -1,7 +1,8 @@
 db.sqlite3
 *.pyc
 charting/*.pyc
-charting/managements/commands/__pycache__/*
+charting/managements/commands/__pycache__
+charting/migrations
 siteconfig/*.pyc
 siteconfig/settings.py
 venv
