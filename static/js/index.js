@@ -89,8 +89,9 @@ function compressedChart() {
   compressed_chart = new Chart(document.getElementById("compressed"), {
     type: 'line',
     data: {
-      labels: ['one_month', 'two_month', 'three_month', 'six_month', 'one_year', 'three_year',
-          'five_year', 'seven_year', 'ten_year', 'twenty_year', 'thirty_year'],
+      labels: [
+        '1 Month', '2 Month', '3 Month', '6 Month', '1 Year', '3 Year',
+        '5 Year', '7 Year', '10 Year', '20 Year', '30 Year'],
       datasets: [{
         label: 'Daily Treasury Yield Curve Rates',
         data: null,
