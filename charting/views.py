@@ -25,4 +25,5 @@ class BondYieldData(APIView):
 
 
 def index(request):
-  return render(request, 'index.html')
+  latest = BondYield.objects.latest('date')
+  return render(request, 'index.html', {'last_updated': latest.date})
