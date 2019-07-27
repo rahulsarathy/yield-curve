@@ -2,6 +2,10 @@ from bs4 import BeautifulSoup
 from charting.models import BondYield
 from datetime import datetime
 from django.core.management.base import BaseCommand
+import requests
+
+
+TREASURY_URL = 'https://data.treasury.gov/feed.svc/DailyTreasuryYieldCurveRateData'
 
 
 def get_field(content, field):
@@ -18,9 +22,8 @@ class Command(BaseCommand):
     pass
   
   def handle(self, *args, **options):
-    f = open('data_dump.txt', 'r')
-    rss_feed = BeautifulSoup(f, features='xml')
-    f.close()
+    data = requests.get(TREASURY_URL)
+    rss_feed = BeautifulSoup(data.text, features='xml')
     
     contents = rss_feed.find_all('content')
     bonds = []
