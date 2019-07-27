@@ -47,5 +47,9 @@ class Command(BaseCommand):
     # Sort the bonds by date and insert them into the database accordingly.
     bonds.sort(key=lambda x: x.date)
     for b in bonds:
-      b.save()
+      try:
+        bond = BondYield.objects.get(date=b.date)
+      except BondYield.DoesNotExist:
+        b.save()
+
     print (len(bonds), 'bonds added.')
