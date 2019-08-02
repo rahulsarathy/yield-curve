@@ -1,5 +1,6 @@
 beautifulsoup4
 django
+django-crispy-forms
 django-rest-framework
 lxml
 psycopg2
