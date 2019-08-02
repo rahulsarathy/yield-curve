@@ -2,6 +2,7 @@
 # Defines the handlers for all of the bond-curve charting pages.
 
 from __future__ import unicode_literals
+from charting.forms import CompoundCalculatorForm
 from charting.models import BondYield
 from charting.serializers import BondYieldSerializer
 from datetime import datetime
@@ -33,4 +34,5 @@ def index(request):
   return render(request, 'index.html', {'last_updated': latest.date})
 
 def compound(request):
-  return render(request, 'compound.html')
+  compound_form = CompoundCalculatorForm()
+  return render(request, 'compound.html', {'form': compound_form})
