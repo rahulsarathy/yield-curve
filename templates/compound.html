@@ -1,0 +1,25 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Compounding Calculator</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <h1>Compounding Calculator</h1>
+  <p>
+    Investing is a useful tool to help you achieve your financial goals. To
+    illustrate the power of investing early, use this calculator to see how
+    your money will grow over time!
+  </p>
+  <p><i>"Compounding is the eighth wonder of the world." -Albert Einstein</i></p>
+	<form action="" method="POST">
+		<div>
+			{{ form.as_p }}
+		</div>
+		{% csrf_token %}
+		<input class="btn btn-primary" type="submit" value="Calculate!">
+	</form>
+</body>
+</html>

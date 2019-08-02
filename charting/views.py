@@ -2,6 +2,7 @@
 # Defines the handlers for all of the bond-curve charting pages.
 
 from __future__ import unicode_literals
+from charting.forms import CompoundCalculatorForm
 from charting.models import BondYield
 from charting.serializers import BondYieldSerializer
 from datetime import datetime
@@ -25,5 +26,13 @@ class BondYieldData(APIView):
 
 
 def index(request):
+  """
+  Renders the bond yield curve chart, along with the last time that the
+  data was updated.
+  """
   latest = BondYield.objects.latest('date')
   return render(request, 'index.html', {'last_updated': latest.date})
+
+def compound(request):
+  compound_form = CompoundCalculatorForm()
+  return render(request, 'compound.html', {'form': compound_form})
