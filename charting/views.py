@@ -34,5 +34,13 @@ def index(request):
   return render(request, 'index.html', {'last_updated': latest.date})
 
 def compound(request):
-  compound_form = CompoundCalculatorForm()
-  return render(request, 'compound.html', {'form': compound_form})
+  if request.method == 'POST':
+    form = CompoundCalculatorForm(request.POST)
+    if form.is_valid():
+      form_data = form.data
+      print('Initial:', form_data['initial_value'])
+      print('Monthly:', form_data['monthly_contribution'])
+      print('Growth:', form_data['annual_growth'])
+  else:
+    form = CompoundCalculatorForm()
+  return render(request, 'compound.html', {'form': form})
