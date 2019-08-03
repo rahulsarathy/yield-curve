@@ -10,7 +10,6 @@ $(function() {
     var data = $("#compound_form :input").serializeArray();
     var json = {};
     for (var i = 0; i < 3; i++) {
-      // console.log(form_elem);
       json[data[i].name] = data[i].value;
     }
     
@@ -31,8 +30,6 @@ $(function() {
           addData(compound_chart, deposits, returns);
         }
     });
-    console.log(json);
-    console.log(data);
   });
 });
 

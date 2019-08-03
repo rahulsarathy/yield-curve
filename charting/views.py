@@ -38,16 +38,6 @@ def index(request):
 def compound_form(request):
   if request.method == 'POST':
     form = CompoundCalculatorForm(request.POST)
-    if form.is_valid():
-      form_data = form.data
-      initial = int(form_data['initial_value'])
-      contribution = int(form_data['monthly_contribution'])
-      growth = float(form_data['annual_growth'])
-
-      # Compute value
-      # print('1 year:', monthly(initial, contribution, growth, 1))
-      # print('10 years:', monthly(initial, contribution, growth, 10))
-      # print('30 years:', monthly(initial, contribution, growth, 30))
   else:
     form = CompoundCalculatorForm()
   return render(request, 'compound.html', {'form': form})
@@ -77,19 +67,3 @@ def compound_calculator(request, format=None):
     }
   }
   return JsonResponse(data)
-
-# ['1 year': {
-#   'contri': deposits
-#   'return': value - deposits
-# },
-# '10 years': {
-#   'contri': deposits,
-#   'return': value - deposits
-# },
-# '30 years': {
-#   'contributions': deposits
-#   'return': value - deposits
-# }]
-
-# def compound_calculator(request):
-#   return HttpResponse('Not!')
