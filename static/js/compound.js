@@ -41,6 +41,10 @@ function compoundChart() {
         }]
       },
       options: {
+        title: {
+          display: true,
+          text: 'Investment Return Over Time'
+        },
         scales: {
           yAxes: [{
             stacked: true,
