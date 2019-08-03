@@ -14,13 +14,14 @@ def monthly(initial_deposit, monthly_deposit, annual_growth, years):
   :param growth_rate: The percentage rate at which the investments grow.
   :param years: The number of years that the investment is held.
   """
-  deposits = initial_deposit
+  contributions = initial_deposit
   value = initial_deposit
   month_growth = monthly_rate(annual_growth)
   for _ in range(12):
     for _ in range(years):
       value *= month_growth
       value += monthly_deposit
+      contributions += monthly_deposit
 
   # Round to the nearest cent.
-  return round(value, 2)
+  return round(value, 2), contributions

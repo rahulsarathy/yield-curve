@@ -2,12 +2,14 @@
 # Defines the handlers for all of the bond-curve charting pages.
 
 from __future__ import unicode_literals
+from charting.compound import monthly
 from charting.forms import CompoundCalculatorForm
 from charting.models import BondYield
 from charting.serializers import BondYieldSerializer
 from datetime import datetime
-from django.http import Http404
-from django.shortcuts import render
+from django.http import Http404, JsonResponse
+from django.shortcuts import render, HttpResponse
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -33,14 +35,35 @@ def index(request):
   latest = BondYield.objects.latest('date')
   return render(request, 'index.html', {'last_updated': latest.date})
 
-def compound(request):
+def compound_form(request):
   if request.method == 'POST':
     form = CompoundCalculatorForm(request.POST)
-    if form.is_valid():
-      form_data = form.data
-      print('Initial:', form_data['initial_value'])
-      print('Monthly:', form_data['monthly_contribution'])
-      print('Growth:', form_data['annual_growth'])
   else:
     form = CompoundCalculatorForm()
   return render(request, 'compound.html', {'form': form})
+
+@api_view(['GET'])
+def compound_calculator(request, format=None):
+  initial = int(request.GET.get('initial_value'))
+  contribution = int(request.GET.get('monthly_contribution'))
+  growth = float(request.GET.get('annual_growth'))
+  
+  one_val, one_contrib = monthly(initial, contribution, growth, 1)
+  ten_val, ten_contrib = monthly(initial, contribution, growth, 10)
+  thirty_val, thirty_contrib = monthly(initial, contribution, growth, 30)
+  
+  data = {
+    '1 year': {
+      'Deposits': one_contrib,
+      'Return': round(one_val - one_contrib, 2)
+    },
+    '10 years': {
+      'Deposits': ten_contrib,
+      'Return': round(ten_val - ten_contrib, 2)
+    },
+    '30 years': {
+      'Deposits': thirty_contrib,
+      'Return': round(thirty_val - thirty_contrib, 2)
+    }
+  }
+  return JsonResponse(data)

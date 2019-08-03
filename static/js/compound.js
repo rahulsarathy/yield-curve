@@ -1,17 +1,52 @@
-var chart;
+var compound_chart;
 
 window.onload = function() {
   compoundChart();
 }
 
+$(function() {
+  $('#compound_form').on('submit', function(e) {
+    e.preventDefault();  // prevent form from submitting
+    var data = $("#compound_form :input").serializeArray();
+    var json = {};
+    for (var i = 0; i < 3; i++) {
+      json[data[i].name] = data[i].value;
+    }
+    
+    $.ajax({
+        url: '/api/v1/compound_calculator/',
+        data: json,
+        success: function(data) {
+          deposits = [
+            data['1 year']['Deposits'],
+            data['10 years']['Deposits'],
+            data['30 years']['Deposits']
+          ];
+          returns = [
+            data['1 year']['Return'],
+            data['10 years']['Return'],
+            data['30 years']['Return']
+          ];
+          addData(compound_chart, deposits, returns);
+        }
+    });
+  });
+});
+
+function addData(chart, deposits, returns) {
+  chart.data.datasets[0].data = deposits;
+  chart.data.datasets[1].data = returns;
+  chart.update();
+}
+
 function compoundChart() {
-  chart = new Chart(document.getElementById("compound_chart"), {
+  compound_chart = new Chart(document.getElementById('compound_chart'), {
     type: 'bar',
     data: {
-      labels: ["1 year", "10 years", "30 years"],
+      labels: ['1 year', '10 years', '30 years'],
       datasets: [{
         label: 'Deposits',
-        data: [10, 19, 3],
+        data: null,  // Will be added through addData()
           backgroundColor: [
             // Slatish blue
             'rgba(18, 95, 163, 0.2)',
@@ -28,7 +63,7 @@ function compoundChart() {
         },
         {
           label: 'Return',
-          data: [15, 19, 3],
+          data: null,  // Will be added through addData()
           backgroundColor: [
             // Tarragon
             'rgba(18, 163, 49, 0.2)',
@@ -67,6 +102,6 @@ function compoundChart() {
   });
 
   // 750x750
-  chart.canvas.parentNode.style.height = '750px';
-  chart.canvas.parentNode.style.width = '750px';
+  compound_chart.canvas.parentNode.style.height = '750px';
+  compound_chart.canvas.parentNode.style.width = '750px';
 }
