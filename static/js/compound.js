@@ -5,10 +5,10 @@ window.onload = function() {
 }
 
 function compoundChart() {
-  chart = new Chart(document.getElementById("compound_chart"), {
+  chart = new Chart(document.getElementById('compound_chart'), {
     type: 'bar',
     data: {
-      labels: ["1 year", "10 years", "30 years"],
+      labels: ['1 year', '10 years', '30 years'],
       datasets: [{
         label: 'Deposits',
         data: [10, 19, 3],
