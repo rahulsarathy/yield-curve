@@ -11,6 +11,8 @@
   <!-- Chart.js imports -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+  <!-- jQuery imports -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <!-- My imports -->
   <script src="{% static 'js/compound.js' %}"></script>
 </head>
@@ -25,7 +27,7 @@
   
   <div class="row">
     <div class="col-4">
-    	<form action="" method="POST">
+    	<form action="" method="POST" id="compound_form">
     		<div>
     			{{ form | crispy }}
     		</div>

@@ -25,8 +25,3 @@ def monthly(initial_deposit, monthly_deposit, annual_growth, years):
 
   # Round to the nearest cent.
   return round(value, 2), contributions
-
-# {
-#   'contributions': deposits
-#   'return': value - deposits
-# }
