@@ -16,15 +16,18 @@ class CompoundTest(unittest.TestCase):
     Checks that monthly() produces the correct total value of an investment
     after a single year, but with no regular monthly deposits.
     """
-    # 1000 * 1.1 = 1100
-    self.assertAlmostEqual(monthly(1000, 0, 1.1, 1), 1100)
+    value, contributions = monthly(1000, 0, 1.1, 1)
+    self.assertEqual(contributions, 1000)
+    self.assertAlmostEqual(value, 1100)
 
   def test_compound_monthly_one_year_with_deposits(self):
     """
     Checks that monthly() produces the correct total value of an investment
     after a single year with regular monthly deposits.
     """
-    self.assertAlmostEqual(monthly(1000, 100, 1.1, 1), 2354.05)
+    value, contributions = monthly(1000, 100, 1.1, 1)
+    self.assertEqual(contributions, 2200)
+    self.assertAlmostEqual(value, 2354.05)
 
 if __name__ == '__main__':
   unittest.main()
