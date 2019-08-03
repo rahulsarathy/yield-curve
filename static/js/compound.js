@@ -13,14 +13,16 @@ function compoundChart() {
         label: 'Deposits',
         data: [10, 19, 3],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 99, 132, 0.2)'
+            // Slatish blue
+            'rgba(18, 95, 163, 0.2)',
+            'rgba(18, 95, 163, 0.2)',
+            'rgba(18, 95, 163, 0.2)'
           ],
           borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(255, 99, 132, 1)',
-            'rgba(255, 99, 132, 1)'
+            // Slatish blue
+            'rgba(18, 95, 163, 1)',
+            'rgba(18, 95, 163, 1)',
+            'rgba(18, 95, 163, 1)'
           ],
           borderWidth: 2
         },
@@ -28,14 +30,16 @@ function compoundChart() {
           label: 'Return',
           data: [15, 19, 3],
           backgroundColor: [
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
+            // Tarragon
+            'rgba(18, 163, 49, 0.2)',
+            'rgba(18, 163, 49, 0.2)',
+            'rgba(18, 163, 49, 0.2)'
           ],
           borderColor: [
-            'rgba(255, 159, 64, 1)',
-            'rgba(255, 159, 64, 1)',
-            'rgba(255, 159, 64, 1)'
+            // Tarragon
+            'rgba(18, 163, 49, 1)',
+            'rgba(18, 163, 49, 1)',
+            'rgba(18, 163, 49, 1)'
           ],
           borderWidth: 2
         }]
