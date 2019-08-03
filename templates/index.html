@@ -16,12 +16,12 @@
   <script src="{% static 'js/index.js' %}"></script>
 </head>
 <body>
-  <h1>Yield Curve</h1>
+  <h1>Yield Curve</h1>  
+  <a href="/compound">Compounding Calculator</a>
   <p>The yield curve on <a href="https://www.treasury.gov/resource-center/data-chart-center/interest-rates/pages/textview.aspx?data=yield">treasury.gov</a> sucks so here's one that doesn't.</p>
   <p>Last updated: {{ last_updated }}</p>
   <p>Date: <input type="text" id="datepicker"></p>
   <canvas id="compressed"></canvas> 
   <canvas id="uncompressed"></canvas>
-  <a href="/compound">Compounding Calculator</a>
 </body>
 </html>
