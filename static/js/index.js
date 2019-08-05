@@ -25,7 +25,7 @@ function initDatePicker() {
 
 function getBondData(date) {
   $.ajax({
-      url: 'api/v1/bond_yield/' + date,
+      url: '/api/v1/bond_yield/' + date,
       success: function(data) {
         year = parseInt(date.substring(0, 4))
         month = parseInt(date.substring(4, 6))
