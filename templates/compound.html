@@ -1,43 +1,39 @@
+{% extends 'navbar.html' %}
+
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
-<!doctype html>
-<html lang="en">
-<head>
-  <title>Compounding Calculator</title>
-  <!-- Bootstrap imports -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% block title %}Compounding Calculator{% endblock %}
+
+{% block imports %}
   <!-- Chart.js imports -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-  <!-- jQuery imports -->
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <!-- My imports -->
-  <script src="{% static 'js/compound.js' %}"></script>
-</head>
-<body>
-  <h1>Compounding Calculator</h1>    
-  <a href="/">Yield Curve Chart</a>
-  <p>
-    Investing is a useful tool to help you achieve your financial goals. To
-    illustrate the power of investing early, use this calculator to see how
-    your money will grow over time!
-  </p>
-  <p><i>"Compounding is the eighth wonder of the world." -Albert Einstein</i></p>
-  <div class="row">
-    <div class="col-4">
-    	<form action="" method="POST" id="compound_form">
-    		<div>
-    			{{ form | crispy }}
-    		</div>
-    		{% csrf_token %}
-    		<input class="btn btn-primary" type="submit" value="Calculate!">
-    	</form>
-    </div>
-    <div class="col-8">
-      <canvas id="compound_chart"></canvas>
-    </div>
+<!-- jQuery imports -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- My imports -->
+<script src="{% static 'js/compound.js' %}"></script>
+{% endblock imports %}
+
+{% block content %}
+<h1>Compounding Calculator</h1>    
+<p>
+  Investing is a useful tool to help you achieve your financial goals. To
+  illustrate the power of investing early, use this calculator to see how
+  your money will grow over time!
+</p>
+<p><i>"Compounding is the eighth wonder of the world." -Albert Einstein</i></p>
+<div class="row">
+  <div class="col-4">
+  	<form action="" method="POST" id="compound_form">
+  		<div>
+  			{{ form | crispy }}
+  		</div>
+  		{% csrf_token %}
+  		<input class="btn btn-primary" type="submit" value="Calculate!">
+  	</form>
   </div>
-</body>
-</html>
+  <div class="col-8">
+    <canvas id="compound_chart"></canvas>
+  </div>
+</div>
+{% endblock %}

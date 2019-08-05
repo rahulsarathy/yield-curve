@@ -28,12 +28,15 @@ class BondYieldData(APIView):
 
 
 def index(request):
+  return render(request, 'index.html')
+
+def yield_curve(request):
   """
   Renders the bond yield curve chart, along with the last time that the
   data was updated.
   """
   latest = BondYield.objects.latest('date')
-  return render(request, 'index.html', {'last_updated': latest.date})
+  return render(request, 'yield.html', {'last_updated': latest.date})
 
 def compound_form(request):
   if request.method == 'POST':
