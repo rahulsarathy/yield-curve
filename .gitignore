@@ -1,8 +1,10 @@
 db.sqlite3
+division.pem
 *.pyc
 charting/*.pyc
 charting/managements/commands/__pycache__
 charting/migrations
+Makefile
 siteconfig/*.pyc
 siteconfig/settings.py
 venv
