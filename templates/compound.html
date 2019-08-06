@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
-{% block title %}Compounding Calculator{% endblock %}
+{% block title %}Divison | Compounding Calculator{% endblock %}
 
 {% block imports %}
 <!-- Chart.js imports -->
@@ -13,6 +13,8 @@
 <!-- My imports -->
 <script src="{% static 'js/compound.js' %}"></script>
 {% endblock imports %}
+
+{% block compound_active %}<li class="nav-item active">{% endblock %}
 
 {% block content %}
 <h1>Compounding Calculator</h1>    
