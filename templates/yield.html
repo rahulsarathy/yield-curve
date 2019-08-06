@@ -19,6 +19,8 @@
 <script src="{% static 'js/yield.js' %}"></script>
 {% endblock %}
 
+{% block yield_active %}<li class="nav-item active">{% endblock %}
+
 {% block content %}
 <h1>Yield Curve</h1>  
 <p>The yield curve on <a href="https://www.treasury.gov/resource-center/data-chart-center/interest-rates/pages/textview.aspx?data=yield">treasury.gov</a> sucks so here's one that doesn't.</p>
