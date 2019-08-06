@@ -4,7 +4,6 @@
 import datetime
 import requests
 from charting.models import BondYield
-from django.test import TestCase
 from django.test.client import RequestFactory
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -40,3 +39,19 @@ class BondYieldTests(APITestCase):
     """
     response = self.client.get(TEST_ROOT + '/api/v1/bond_yield/20190704', format='json')
     self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+class CompoundCalculatorTests(APITestCase):
+  def test_compound_calculator(self):
+    """
+    Checks that a GET request for a compound calculation with valid parameters
+    produces the appropriate 1 year, 10 year, and 30 year values.
+    """
+    response = self.client.get(TEST_ROOT + '/api/v1/compound_calculator/?initial_value=1000&monthly_contribution=100&annual_growth=1.08')
+    self.assertEqual(response.status_code, status.HTTP_200_OK)
+    data = response.json()
+    self.assertEqual(data['1 year']['Deposits'], 2200)
+    self.assertEqual(data['1 year']['Return'], 123.39)
+    self.assertEqual(data['10 year']['Deposits'], 13000)
+    self.assertEqual(data['10 year']['Return'], 7171.35)
+    self.assertEqual(data['30 year']['Deposits'], 37000)
+    self.assertEqual(data['30 year']['Deposits'], 113917.72)
