@@ -8,7 +8,8 @@ $(function() {
   $('#compound_form').on('submit', function(e) {
     e.preventDefault();  // prevent form from submitting
     var data = $("#compound_form :input").serializeArray();
-    console.log(data);
+
+    // Collect parameters for compound calculation 
     var json = {};
     for (var i = 0; i < 3; i++) {
       json[data[i].name] = data[i].value;
