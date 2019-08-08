@@ -11,6 +11,15 @@ class CompoundTest(unittest.TestCase):
     # 1.00797414**12 = 1.1
     self.assertAlmostEqual(monthly_rate(1.1), 1.00797414)
 
+  def test_compound_zero_years(self):
+    """
+    Checks that monthly() produces the initial value of an investment after no
+    years.
+    """
+    value, contributions = monthly(1000, 100, 1.1, 0)
+    self.assertEqual(contributions, 1000)
+    self.assertEqual(value, 1000)
+
   def test_compound_monthly_one_year_no_deposits(self):
     """
     Checks that monthly() produces the correct total value of an investment
