@@ -8,6 +8,7 @@ $(function() {
   $('#compound_form').on('submit', function(e) {
     e.preventDefault();  // prevent form from submitting
     var data = $("#compound_form :input").serializeArray();
+    console.log(data);
     var json = {};
     for (var i = 0; i < 3; i++) {
       json[data[i].name] = data[i].value;
@@ -17,23 +18,23 @@ $(function() {
         url: '/api/v1/compound_calculator/',
         data: json,
         success: function(data) {
-          deposits = [
-            data['1 year']['Deposits'],
-            data['10 years']['Deposits'],
-            data['30 years']['Deposits']
-          ];
-          returns = [
-            data['1 year']['Return'],
-            data['10 years']['Return'],
-            data['30 years']['Return']
-          ];
-          addData(compound_chart, deposits, returns);
+          var deposits = [];
+          var returns = [];
+          var labels = [];
+          for (var i = 0; i <= 30; i++) {
+            var label = i + ' years';
+            labels.push(i);
+            deposits.push(data[label]['Deposits']);
+            returns.push(data[label]['Return']);
+          }
+          addData(compound_chart, labels, deposits, returns);
         }
     });
   });
 });
 
-function addData(chart, deposits, returns) {
+function addData(chart, labels, deposits, returns) {
+  chart.data.labels = labels;
   chart.data.datasets[0].data = deposits;
   chart.data.datasets[1].data = returns;
   chart.update();
@@ -41,9 +42,9 @@ function addData(chart, deposits, returns) {
 
 function compoundChart() {
   compound_chart = new Chart(document.getElementById('compound_chart'), {
-    type: 'bar',
+    type: 'line',
     data: {
-      labels: ['1 year', '10 years', '30 years'],
+      labels: null, // Will be added through addData()
       datasets: [{
         label: 'Deposits',
         data: null,  // Will be added through addData()
@@ -86,12 +87,20 @@ function compoundChart() {
         },
         scales: {
           yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Value'
+            },
             stacked: true,
             ticks: {
               beginAtZero: true
             }
           }],
           xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Years'
+            },
             stacked: true,
             ticks: {
               beginAtZero: true
