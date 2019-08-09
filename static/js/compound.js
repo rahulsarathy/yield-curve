@@ -8,27 +8,26 @@ $(function() {
   $('#compound_form').on('submit', function(e) {
     e.preventDefault();  // prevent form from submitting
     var data = $("#compound_form :input").serializeArray();
-    console.log(data);
     var json = {};
     for (var i = 0; i < 3; i++) {
       json[data[i].name] = data[i].value;
     }
     
     $.ajax({
-        url: '/api/v1/compound_calculator/',
-        data: json,
-        success: function(data) {
-          var deposits = [];
-          var returns = [];
-          var labels = [];
-          for (var i = 0; i <= 30; i++) {
-            var label = i + ' years';
-            labels.push(i);
-            deposits.push(data[label]['Deposits']);
-            returns.push(data[label]['Return']);
-          }
-          addData(compound_chart, labels, deposits, returns);
+      url: '/api/v1/compound_calculator/',
+      data: json,
+      success: function(data) {
+        var deposits = [];
+        var returns = [];
+        var labels = [];
+        for (var i = 0; i <= 30; i++) {
+          var label = i + ' years';
+          labels.push(i);
+          deposits.push(data[label]['Deposits']);
+          returns.push(data[label]['Return']);
         }
+        addData(compound_chart, labels, deposits, returns);
+      }
     });
   });
 });
