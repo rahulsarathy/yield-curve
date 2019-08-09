@@ -54,10 +54,6 @@ def compound_calculator(request, format=None):
   contribution = int(request.GET.get('monthly_contribution'))
   growth = float(request.GET.get('annual_growth'))
   
-  # one_val, one_contrib = monthly(initial, contribution, growth, 1)
-  # ten_val, ten_contrib = monthly(initial, contribution, growth, 10)
-  # thirty_val, thirty_contrib = monthly(initial, contribution, growth, 30)
-  
   data = {}
   for yr in range(THIRTY + 1):
     value, contributions = monthly(initial, contribution, growth, yr)
@@ -65,18 +61,4 @@ def compound_calculator(request, format=None):
       'Deposits': contributions,
       'Return': round(value - contributions, 2)
     }
-  # data = {
-  #   '1 year': {
-  #     'Deposits': one_contrib,
-  #     'Return': round(one_val - one_contrib, 2)
-  #   },
-  #   '10 years': {
-  #     'Deposits': ten_contrib,
-  #     'Return': round(ten_val - ten_contrib, 2)
-  #   },
-  #   '30 years': {
-  #     'Deposits': thirty_contrib,
-  #     'Return': round(thirty_val - thirty_contrib, 2)
-  #   }
-  # }
   return JsonResponse(data)
