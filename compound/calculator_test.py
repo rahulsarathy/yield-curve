@@ -1,5 +1,5 @@
+from compound.calculator import monthly_rate, monthly
 import unittest
-from charting.compound import monthly_rate, monthly
 
 
 class CompoundTest(unittest.TestCase):
