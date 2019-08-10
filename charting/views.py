@@ -34,3 +34,6 @@ def yield_curve(request):
   """
   latest = BondYield.objects.latest('date')
   return render(request, 'yield.html', {'last_updated': latest.date})
+
+def resources(request):
+  return render(request, 'resources.html')
