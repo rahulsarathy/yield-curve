@@ -62,3 +62,6 @@ def compound_calculator(request, format=None):
       'Return': round(value - contributions, 2)
     }
   return JsonResponse(data)
+
+def resources(request):
+  return render(request, 'resources.html')

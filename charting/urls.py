@@ -12,4 +12,7 @@ urlpatterns = [
   # Compounding calculator
   url(r'^compound/$', views.compound_form, name='compound-form'),
   url(r'^api/v1/compound', views.compound_calculator, name='compound-calculator'),
+
+  # Resources
+  url(r'^resources/$', views.resources, name='resources'),
 ]
