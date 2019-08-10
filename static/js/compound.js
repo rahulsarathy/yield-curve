@@ -16,20 +16,20 @@ $(function() {
     }
     
     $.ajax({
-        url: '/api/v1/compound_calculator/',
-        data: json,
-        success: function(data) {
-          var deposits = [];
-          var returns = [];
-          var labels = [];
-          for (var i = 0; i <= 30; i++) {
-            var label = i + ' years';
-            labels.push(i);
-            deposits.push(data[label]['Deposits']);
-            returns.push(data[label]['Return']);
-          }
-          addData(compound_chart, labels, deposits, returns);
+      url: '/api/v1/compound_calculator/',
+      data: json,
+      success: function(data) {
+        var deposits = [];
+        var returns = [];
+        var labels = [];
+        for (var i = 0; i <= 30; i++) {
+          var label = i + ' years';
+          labels.push(i);
+          deposits.push(data[label]['Deposits']);
+          returns.push(data[label]['Return']);
         }
+        addData(compound_chart, labels, deposits, returns);
+      }
     });
   });
 });
