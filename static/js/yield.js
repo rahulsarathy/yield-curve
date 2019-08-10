@@ -2,10 +2,9 @@ var compressed_chart;
 var uncompressed_chart;
 
 window.onload = function() {
-
-  initDatePicker()
-  compressedChart()
-  uncompressedChart()
+  initDatePicker();
+  compressedChart();
+  uncompressedChart();
 }
 
 function initDatePicker() {
@@ -14,10 +13,10 @@ function initDatePicker() {
     $("#datepicker").datepicker({
       maxDate: '0',
       onSelect: function(date, datepicker) {
-        var year = date.substring(6, 10)
-        var day = date.substring(3, 5)
-        var month = date.substring(0, 2)
-        getBondData(year + month + day)
+        var year = date.substring(6, 10);
+        var day = date.substring(3, 5);
+        var month = date.substring(0, 2);
+        getBondData(year + month + day);
       }
     });
   });
@@ -27,10 +26,10 @@ function getBondData(date) {
   $.ajax({
       url: '/api/v1/bond_yield/' + date,
       success: function(data) {
-        year = parseInt(date.substring(0, 4))
-        month = parseInt(date.substring(4, 6))
-        day = parseInt(date.substring(6, 8))
-        var today = new Date(year, month, day)
+        year = parseInt(date.substring(0, 4));
+        month = parseInt(date.substring(4, 6));
+        day = parseInt(date.substring(6, 8));
+        var today = new Date(year, month, day);
         var proper_dates = {
           one_month: new Date(year, month + 1, day),
           two_month: new Date(year, month + 2, day),
@@ -47,41 +46,34 @@ function getBondData(date) {
         }
 
 
-        var new_data = ['one_month', 'two_month', 'three_month', 'six_month', 'one_year', 'three_year',
-          'five_year', 'seven_year', 'ten_year', 'twenty_year', 'thirty_year']
+        var new_data = ['one_month', 'two_month', 'three_month', 'six_month', 
+          'one_year', 'three_year', 'five_year', 'seven_year', 'ten_year', 
+          'twenty_year', 'thirty_year'];
 
-        var to_add = []
-        var to_add_uncompressed = []
+        var to_add = [];
+        var to_add_uncompressed = [];
 
         new_data.forEach(function(element) {
-          var wanted_date = proper_dates[element]
+          var wanted_date = proper_dates[element];
           var date_string = wanted_date.getFullYear() + '-' + (wanted_date.getMonth() + 1) + '-' + wanted_date.getDate();
-          to_add.push(data[element])
-          to_add_uncompressed.push(
-          {
+          to_add.push(data[element]);
+          to_add_uncompressed.push({
             t: date_string,
             y: data[element]
-          })
+          });
         });
 
-        addData(compressed_chart, to_add)
-        addData(uncompressed_chart, to_add_uncompressed)
-
-
+        addData(compressed_chart, to_add);
+        addData(uncompressed_chart, to_add_uncompressed);
       }
-
-      // addData(yield_curve, {
-      //   t: date_string,
-      //   y: 10
-      // })
   });
 }
 
 function addData(chart, data) {
   chart.data.datasets.forEach((dataset) => {
-    dataset.data = data
+    dataset.data = data;
   });
-  chart.update()
+  chart.update();
 }
 
 function compressedChart() {
@@ -93,7 +85,7 @@ function compressedChart() {
         '5 Year', '7 Year', '10 Year', '20 Year', '30 Year'],
       datasets: [{
         label: 'Daily Treasury Yield Curve Rates',
-        data: null,
+        data: null,  // addData() will fill this.
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
         ],
@@ -103,29 +95,19 @@ function compressedChart() {
         borderWidth: 1
       }]
     },
-    options: {
-      // scales: {
-      //   xAxes: [{
-      //     type: 'time',
-      //     time: {
-      //       unit: 'year'
-      //     }
-      //   }]
-      // }
-    }
+    options: {}
   });
   compressed_chart.canvas.parentNode.style.height = '750px';
   compressed_chart.canvas.parentNode.style.width = '750px';
-
 }
 
 function uncompressedChart() {
-    uncompressed_chart = new Chart(document.getElementById("uncompressed"), {
+  uncompressed_chart = new Chart(document.getElementById("uncompressed"), {
     type: 'line',
     data: {
       datasets: [{
         label: 'Daily Treasury Yield Curve Rates',
-        data: null,
+        data: null,  // addData() will fill this.
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
         ],
@@ -146,7 +128,6 @@ function uncompressedChart() {
       }
     }
   });
-
   uncompressed_chart.canvas.parentNode.style.height = '750px';
   uncompressed_chart.canvas.parentNode.style.width = '750px';
 }
