@@ -2,19 +2,13 @@
 # Defines the handlers for all of the bond-curve charting pages.
 
 from __future__ import unicode_literals
-from charting.compound import monthly
-from charting.forms import CompoundCalculatorForm
 from charting.models import BondYield
 from charting.serializers import BondYieldSerializer
 from datetime import datetime
-from django.http import Http404, JsonResponse
-from django.shortcuts import render, HttpResponse
-from rest_framework.decorators import api_view
+from django.http import Http404
+from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-
-THIRTY = 30
 
 
 class BondYieldData(APIView):
@@ -40,43 +34,3 @@ def yield_curve(request):
   """
   latest = BondYield.objects.latest('date')
   return render(request, 'yield.html', {'last_updated': latest.date})
-
-def compound_form(request):
-  if request.method == 'POST':
-    form = CompoundCalculatorForm(request.POST)
-  else:
-    form = CompoundCalculatorForm()
-  return render(request, 'compound.html', {'form': form})
-
-@api_view(['GET'])
-def compound_calculator(request, format=None):
-  initial = int(request.GET.get('initial_value'))
-  contribution = int(request.GET.get('monthly_contribution'))
-  growth = float(request.GET.get('annual_growth'))
-  
-  # one_val, one_contrib = monthly(initial, contribution, growth, 1)
-  # ten_val, ten_contrib = monthly(initial, contribution, growth, 10)
-  # thirty_val, thirty_contrib = monthly(initial, contribution, growth, 30)
-  
-  data = {}
-  for yr in range(THIRTY + 1):
-    value, contributions = monthly(initial, contribution, growth, yr)
-    data[str(yr) + ' years'] = {  # data['x years'] = { ... }
-      'Deposits': contributions,
-      'Return': round(value - contributions, 2)
-    }
-  # data = {
-  #   '1 year': {
-  #     'Deposits': one_contrib,
-  #     'Return': round(one_val - one_contrib, 2)
-  #   },
-  #   '10 years': {
-  #     'Deposits': ten_contrib,
-  #     'Return': round(ten_val - ten_contrib, 2)
-  #   },
-  #   '30 years': {
-  #     'Deposits': thirty_contrib,
-  #     'Return': round(thirty_val - thirty_contrib, 2)
-  #   }
-  # }
-  return JsonResponse(data)
