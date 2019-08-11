@@ -1,7 +1,35 @@
 {% extends 'navbar.html' %}
+
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
 {% block title %}Divison | Tax Calculator{% endblock %}
+
+{% block imports %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<!-- jQuery imports -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- My imports -->
+<script src="{% static 'js/taxes.js' %}"></script>
+{% endblock %}
+
 {% block taxes_active %}<li class="nav-item active">{% endblock %}
 {% block content %}
 <h1>Tax Calculator</h1>
 <p>What's your tax liability? How much do you owe Uncle Sam this year? Use this calculator to find out!</p>
+
+<div class="row">
+  <div class="col-4">
+    <form action="" method="POST" id="taxes_form">
+      <div>
+        {{ form | crispy }}        
+      </div>
+      {% csrf_token %}
+      <input class="btn btn-primary" type="submit" value="Calculate!">
+    </form>
+  </div>
+  <div class="col-8">
+    <canvas id="taxes_chart"></canvas>
+  </div>
+</div>
 {% endblock %}
