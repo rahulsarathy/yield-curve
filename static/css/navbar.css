@@ -1,3 +1,8 @@
+body {
+  /* cloudy-knoxville-gradient */
+  background-image:-webkit-linear-gradient(330deg,#fdfbfb 0,#ebedee 100%);
+}
+
 #content {
   padding: 16px;
 }
