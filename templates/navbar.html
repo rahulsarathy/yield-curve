@@ -30,8 +30,15 @@
         {% block taxes_active %}<li class="nav-item">{% endblock %}
           <a class="nav-link" href="/taxes">Tax Calculator</a>
         </li>
-        {% block resources_active %}<li class="nav-item">{% endblock %}
-          <a class="nav-link" href="/resources">Resources</a>
+        
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Investing</a>
+          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/scott_adams">The Scott Adams Strategy</a>            
+            <a class="dropdown-item" href="#">CD Ladders</a>
+          </div>
         </li>
       </ul>
     </div>
