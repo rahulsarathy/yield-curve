@@ -30,17 +30,6 @@ class TaxCalculatorTests(APITestCase):
     TaxBracket.objects.create(state='California', filing_status='SINGLE', tax_type='INCOME', rate=0.123, minimum=551473)
     TaxBracket.objects.create(state='California', filing_status='SINGLE', tax_type='INCOME', rate=0.133, minimum=1000000)
 
-    # 46,"California","SINGLE","INCOME",0.01,0
-    # 47,"California","SINGLE","INCOME",0.02,8223
-    # 48,"California","SINGLE","INCOME",0.029999999999999,19495
-    # 49,"California","SINGLE","INCOME",0.04,30769
-    # 50,"California","SINGLE","INCOME",0.08,42711
-    # 51,"California","SINGLE","INCOME",0.092999999999999,53980
-    # 52,"California","SINGLE","INCOME",0.102999999999999,275738
-    # 53,"California","SINGLE","INCOME",0.113,330884
-    # 54,"California","SINGLE","INCOME",0.123,551473
-    # 55,"California","SINGLE","INCOME",0.133,1000000
-
   def test_tax_calculator(self):
     """
     Checks that a GET request for a tax calculation with valid parameters
