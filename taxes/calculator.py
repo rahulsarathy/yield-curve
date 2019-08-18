@@ -2,10 +2,10 @@
 FEDERAL_RATES = [0.1, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37]
 
 # 2019 Federal Tax Brackets
-SINGLE = [9700, 39475, 84200, 160275, 204100, 510300]
-MARRIED = [19400, 78950, 168400, 321450, 408200, 612350]
-MARRIED_SEPARATELY = [9700, 39475, 160275, 204100, 306175]
-HEAD_OF_HOUSE = [13850, 52850, 84200, 160700, 204100, 510300]
+SINGLE = [0, 9700, 39475, 84200, 160275, 204100, 510300]
+MARRIED = [0, 19400, 78950, 168400, 321450, 408200, 612350]
+MARRIED_SEPARATELY = [0, 9700, 39475, 84200, 160275, 204100, 306175]
+HEAD_OF_HOUSE = [0, 13850, 52850, 84200, 160700, 204100, 510300]
 
 
 def marginal_tax(rates, brackets, income):
@@ -22,7 +22,7 @@ def marginal_tax(rates, brackets, income):
     tax_bracket = b
     if income <= brackets[b]:
       break
-
+  # print('Tax Bracket:', tax_bracket)
   # Insert the income among the tax brackets.
   rates_copy = rates.copy()
   brackets_copy = brackets.copy()
@@ -33,15 +33,16 @@ def marginal_tax(rates, brackets, income):
     tax_bracket += 1
     brackets_copy.insert(tax_bracket, income)
   else:
-    rates_copy.insert(tax_bracket, rates[tax_bracket])
+    rates_copy.insert(tax_bracket-1, rates[tax_bracket-1])
     brackets_copy.insert(tax_bracket, income)
-  brackets_copy.insert(0, 0)
+
+  # print(rates_copy)
+  # print(brackets_copy)
 
   taxes = 0
-  tax_bracket += 1
   for b in range(tax_bracket):
     taxes += rates_copy[b] * (brackets_copy[b + 1] - brackets_copy[b])
-  return taxes
+  return round(taxes, 2)
 
 def federal(income):
   """
