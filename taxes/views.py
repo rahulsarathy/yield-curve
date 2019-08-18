@@ -18,21 +18,6 @@ def tax_calculator(request, format=None):
   income = int(request.GET.get('income'))
   status = request.GET.get('filing_status')
   state = request.GET.get('state')
-  # print('State:', state)
-  # print('status:', status)
-  # taxes = federal(income)
-
-  minimums, rates = [], []
-  brackets = TaxBracket.objects.filter(state=state, filing_status=status)
-  for b in brackets:
-    minimums.append(b.minimum)
-    rates.append(b.rate)
-  minimums.sort()
-  rates.sort()
-  # print(minimums)
-  # print(rates)
-  state_taxes = marginal_tax(rates, minimums, income)
-  # print('State Taxes:', state_taxes)
 
   fed_min, fed_rates = [], []
   brackets = TaxBracket.objects.filter(state='United States', filing_status=status)
@@ -42,6 +27,19 @@ def tax_calculator(request, format=None):
   fed_min.sort()
   fed_rates.sort()
   fed_taxes = marginal_tax(fed_rates, fed_min, income)
+
+  
+  # For the purposes of state teaxes, there are only two filing statuses,
+  # SINGLE, and MARRIED_JOINTLY.
+  if status != 'MARRIED_JOINTLY': status = 'SINGLE'
+  minimums, rates = [], []
+  brackets = TaxBracket.objects.filter(state=state, filing_status=status)
+  for b in brackets:
+    minimums.append(b.minimum)
+    rates.append(b.rate)
+  minimums.sort()
+  rates.sort()
+  state_taxes = marginal_tax(rates, minimums, income)
 
   return JsonResponse({
     'After Tax Income': round(income - state_taxes - fed_taxes, 2),
