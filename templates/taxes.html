@@ -16,10 +16,9 @@
 {% block taxes_active %}<li class="nav-item active">{% endblock %}
 {% block content %}
 <h1>Tax Calculator</h1>
-<p>What's your tax liability? How much do you owe Uncle Sam this year? Use this calculator to find out!</p>
-
 <div class="row">
   <div class="col-4">
+    <p>What's your tax liability? How much do you owe Uncle Sam this year? Use this calculator to find out!</p>
     <form action="" method="POST" id="taxes_form">
       <div>
         {{ form | crispy }}        
