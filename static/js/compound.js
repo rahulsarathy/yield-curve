@@ -110,8 +110,4 @@ function compoundChart() {
         }
       }
   });
-
-  // 750x750
-  compound_chart.canvas.parentNode.style.height = '750px';
-  compound_chart.canvas.parentNode.style.width = '750px';
 }

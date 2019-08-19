@@ -1,6 +1,5 @@
 {% extends 'navbar.html' %}
 
-{% load crispy_forms_tags %}
 {% load staticfiles %}
 
 {% block title %}Divison | Compounding Calculator{% endblock %}
@@ -28,7 +27,7 @@
   <div class="col-4">
   	<form action="" method="POST" id="compound_form">
   		<div>
-  			{{ form | crispy }}
+  			{{ form }}
   		</div>
   		{% csrf_token %}
       <input class="btn btn-default" type="submit" value="Calculate!">
