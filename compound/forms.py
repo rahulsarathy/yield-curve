@@ -15,6 +15,6 @@ GROWTH_CHOICES = (
 )
 
 class CompoundCalculatorForm(forms.Form):
-  initial_value = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control mb-4'}))
-  monthly_contribution = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control mb-4'}))
+  initial_value = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control mb-4'}))
+  monthly_contribution = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control mb-4'}))
   annual_growth = forms.CharField(widget=forms.Select(choices=GROWTH_CHOICES, attrs={'class': 'form-control mb-4'}))
