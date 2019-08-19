@@ -15,6 +15,7 @@ def tax_form(request):
 
 @api_view(['GET'])
 def tax_calculator(request, format=None):
+  # print(request.GET)
   income = int(request.GET.get('income'))
   status = request.GET.get('filing_status')
   state = request.GET.get('state')
