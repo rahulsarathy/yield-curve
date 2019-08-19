@@ -35,18 +35,14 @@ class CalculatorTest(unittest.TestCase):
     rates = [0.01, 0.02, 0.03, 0.04, 0.08, 0.093, 0.103, 0.113, 0.123]
     minimums = [0, 8223, 19495, 30769, 42711, 53980, 275738, 330884, 551473, 1000000]
     self.assertAlmostEqual(marginal_tax(rates, minimums, 10000), 117.77)
-
     self.assertAlmostEqual(marginal_tax(rates, minimums, 100000), 6304.95)
-    # 0.01 0
-    # 0.02 8223
-    # 0.03 19495
-    # 0.04 30769
-    # 0.08 42711
-    # 0.093 53980
-    # 0.103 275738
-    # 0.113 330884
-    # 0.123 551473
-    # 0.133 1000000
+
+  def test_calculator_single_alaska(self):
+    """
+    Checks that marginal_tax() returns 0 when a state does not charge income
+    taxes.
+    """
+    self.assertEqual(marginal_tax([0], [0], 123456), 0)
 
 if __name__ == '__main__':
   unittest.main()

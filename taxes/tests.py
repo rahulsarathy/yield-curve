@@ -30,10 +30,11 @@ class TaxCalculatorTests(APITestCase):
     TaxBracket.objects.create(state='California', filing_status='SINGLE', tax_type='INCOME', rate=0.123, minimum=551473)
     TaxBracket.objects.create(state='California', filing_status='SINGLE', tax_type='INCOME', rate=0.133, minimum=1000000)
 
-  def test_tax_calculator(self):
+  def test_tax_calculator_single(self):
     """
-    Checks that a GET request for a tax calculation with valid parameters
-    produces the appropriate federal taxes owed and after tax income.
+    Checks that a GET request for a tax calculation with valid parameters,
+    including a SINGLE filing status, produces the correct federal taxes
+    owed, state taxes owed, and after tax income.
     """
     response = self.client.get(TEST_ROOT + '/api/v1/taxes/?income=180000&filing_status=SINGLE&state=California')
     data = response.json()
@@ -41,3 +42,29 @@ class TaxCalculatorTests(APITestCase):
     self.assertEqual(data['Federal Taxes'], 38952.50)
     self.assertEqual(data['State Taxes'], 13744.95)
     self.assertEqual(data['After Tax Income'], 127302.55)
+
+  def test_tax_calculator_married_jointly(self):
+    """
+    Checks that a GET request for a tax calculation with valid parameters,
+    including a MARRIED_JOINTLY filing status, produces the correct taxes owed
+    and after tax income.
+    """
+    response = self.client.get(TEST_ROOT + '/api/v1/taxes/?income=180000&filing_status=MARRIED_JOINTLY&state=California')
+    data = response.json()
+  
+  def test_tax_calculator_married_separately(self):
+    """
+    Checks that a GET request for a tax calculation with a MARRIED_SEPARATELY
+    filing status produces the correct taxes and after tax income.
+    """
+    response = self.client.get(TEST_ROOT + '/api/v1/taxes/?income=180000&filing_status=MARRIED_SEPARATELY&state=California')
+    data = response.json()
+
+    self.assertEqual(data['State Taxes'], 13744.95)
+  
+  def test_tax_calculator_invalid_params(self):
+    """
+    Checks that a GET request for a tax calculation with invalid parameters
+    produces the appropriate status message.
+    """
+    pass
