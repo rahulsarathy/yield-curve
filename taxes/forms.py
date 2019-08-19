@@ -17,6 +17,6 @@ STATES = (
 
 
 class TaxForm(forms.Form):
-  income = forms.IntegerField(label='Annual Gross Income (AGI)', widget=forms.TextInput(attrs={'class': 'form-control mb-4'}))
+  income = forms.IntegerField(label='Annual Gross Income (AGI)', widget=forms.NumberInput(attrs={'class': 'form-control mb-4'}))
   filing_status = forms.CharField(widget=forms.Select(choices=FILING_STATUSES, attrs={'class': 'form-control mb-4'}))
   state = forms.CharField(widget=forms.Select(choices=STATES, attrs={'class': 'form-control mb-4'}))
