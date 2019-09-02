@@ -87,11 +87,13 @@
 
 <p>Credit card issuers advertise their interest rates as an APR (annual percentage rate). Balances are compounded monthly, which means that the interest is calculated every month. Since compounding is the principle of calculating interest on top of interest, we can find the monthly interest rate like so:</p>
 
+{# I = \sqrt[12]{APR} #}
 <img src="{% static 'img/interest_calc.png' %}">
 <br>
 <br>
 <p>Or, in the case of our sample card:</p>
 
+{# I = \sqrt[12]{1.2224} = 1.0168754874 #}
 <img src="{% static 'img/interest_rate_calc.png' %}">
 <br><br>
 
@@ -114,7 +116,37 @@
 <p>If the card issuer doesn't receive the minimum payment by July 24th, then our new balance would be:</p>
 
 <img src="{% static 'img/no_payment_calc.png' %}">
-{% endblock %}
+<br><br>
 
-{# (1 + I / 12)^12 = 1.2224 #}
-{# 1 + I / 12 =  1.0168754874 #}
+<h2>Summary</h2>
+
+<p>Interest and late charges rack up really quickly! Be sure to pay your statement balance in full every month.</p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Payment</th>
+      <th scope="col">Remaining Balance</th>
+      <th scope="col">Interest & Late Fees</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Statement Balance</td>
+      <td>$33</td>
+      <td>$0</td>
+    </tr>
+    <tr>
+      <td>Minimum Payment</td>
+      <td>$491.61</td>
+      <td>$7.61</td>
+    </tr>
+    <tr>
+      <td>No Payment</td>
+      <td>$555.03</td>
+      <td>$46.03</td>
+    </tr>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
