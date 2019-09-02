@@ -71,9 +71,8 @@
 
 <p>A credit card's balance is calculated as follows:</p>
 
-<i>B = (S - P) * (1 + I) + C + L</i>
-<br>
-<br>
+<img src="{% static 'img/balance_equation.png' %}">
+<br><br>
 <p>Where</p>
 
 <ul>
@@ -88,35 +87,66 @@
 
 <p>Credit card issuers advertise their interest rates as an APR (annual percentage rate). Balances are compounded monthly, which means that the interest is calculated every month. Since compounding is the principle of calculating interest on top of interest, we can find the monthly interest rate like so:</p>
 
-<i>I = 12√APR</i>
+{# I = \sqrt[12]{APR} #}
+<img src="{% static 'img/interest_calc.png' %}">
 <br>
 <br>
 <p>Or, in the case of our sample card:</p>
 
-<i>APR = 22.24% or 1.224</i>
-<br>
-<i>I = 12√1.224 = 1.0168754874</i>
+{# I = \sqrt[12]{1.2224} = 1.0168754874 #}
+<img src="{% static 'img/interest_rate_calc.png' %}">
+<br><br>
 
 <h2>Avoiding Interest</h2>
 
 <p>If we don't want to pay any interest charges, we should pay at least <b>$476</b> on July 24th to cover the statement balance. The new credit card balance would be <b>$33</b>, but this would only be due the next month, August 24th, along with all purchases posted before July 27th.</p>
 
-<i>B = (476 - 476) * (1.016875) + 33 + 0</i>
-<br>
-<i>B = 0 * 1.016875 + 33 = <b>$33</b></i>
+<img src="{% static 'img/avoiding_interest_calc.png' %}">
+<br><br>
 
 <h2>Minimum Payment</h2>
 
 <p>What happens if we make the minimum payment instead of a payment equal to the statement balance on July 24th? Our new balance would be:</p>
 
-<i>B = (476 - 25) * (1.016875) + 33 = <b>$491.61</b></i>
+<img src="{% static 'img/min_payment_calc.png' %}">
+<br><br>
 
 <h2>No Payment</h2>
 
 <p>If the card issuer doesn't receive the minimum payment by July 24th, then our new balance would be:</p>
 
-<i>B = (476 - 0) * (1.016875) + 33 + 38 = <b>$555.03</b></i>
-{% endblock %}
+<img src="{% static 'img/no_payment_calc.png' %}">
+<br><br>
 
-{# (1 + I / 12)^12 = 1.2224 #}
-{# 1 + I / 12 =  1.0168754874 #}
+<h2>Summary</h2>
+
+<p>Interest and late charges rack up really quickly! Be sure to pay your statement balance in full every month.</p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Payment</th>
+      <th scope="col">Remaining Balance</th>
+      <th scope="col">Interest & Late Fees</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Statement Balance</td>
+      <td>$33</td>
+      <td>$0</td>
+    </tr>
+    <tr>
+      <td>Minimum Payment</td>
+      <td>$491.61</td>
+      <td>$7.61</td>
+    </tr>
+    <tr>
+      <td>No Payment</td>
+      <td>$555.03</td>
+      <td>$46.03</td>
+    </tr>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
